@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Header } from "semantic-ui-react";
+import Button from "../Button/Button";
 class Table extends Component {
   state = {};
   isSearched = searchTerm => item =>
@@ -19,9 +20,9 @@ class Table extends Component {
               <span>{item.num_comments}</span>
               <span>{item.points}</span>
               <div>
-                <button onClick={() => onDismiss(item.objectID)} type="button">
+                <Button onClick={() => onDismiss(item.objectID)}>
                   Dismiss
-                </button>
+                </Button>
               </div>
             </div>
           );
