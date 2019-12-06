@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "semantic-ui-react";
+import Search from "../Search/Search";
+import Table from "../Table/Table";
 
 const list = [
   {
@@ -40,39 +42,13 @@ class News extends Component {
 
   render() {
     const { list, searchTerm } = this.state;
-    const isSearched = searchTerm => item =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase());
 
     return (
       <div className="News">
-        <form>
-          <input
-            type="text"
-            onChange={this.onSearchChange}
-            value={searchTerm}
-          />
-        </form>
-        {list.filter(isSearched(searchTerm)).map(item => {
-          return (
-            <div key={item.objectID}>
-              <Header as="h1">{item.title}</Header>
-              <span>
-                <a href={item.url}>{item.title}</a>
-              </span>
-              <span>{item.author}</span>
-              <span>{item.num_comments}</span>
-              <span>{item.points}</span>
-              <div>
-                <button
-                  onClick={() => this.onDismiss(item.objectID)}
-                  type="button"
-                >
-                  Dismiss
-                </button>
-              </div>
-            </div>
-          );
-        })}
+        <Search value={searchTerm} onChange={this.onSearchChange}>
+          Search
+        </Search>
+        <Table list={list} pattern={searchTerm} onDismiss={this.onDismiss} />
       </div>
     );
   }
